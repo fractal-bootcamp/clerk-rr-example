@@ -16,7 +16,7 @@ export async function loader(args: Route.LoaderArgs) {
     // console.log(messages)
     const { userId, getToken } = await getAuth(args)
     if (!userId) {
-        return redirect('/')
+        return { username: 'Anonymous User', messages }
     }
 
     const clerkClient = createClerkClient({
@@ -32,11 +32,11 @@ export async function loader(args: Route.LoaderArgs) {
 export async function action(args: Route.ActionArgs) {
     // Use `getAuth()` to get the user's ID
     const { userId, getToken } = await getAuth(args)
-    console.log('IN THE ACTION')
+    // console.log('IN THE ACTION')
 
-    // Protect the route by checking if the user is signed in
+    // // Protect the route by checking if the user is signed in
     if (!userId) {
-        return redirect('/')
+        return null
     }
 
     // Get the form data
